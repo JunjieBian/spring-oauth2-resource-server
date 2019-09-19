@@ -1,33 +1,19 @@
 spring:
   application:
-    name: spring-oauth2-server
+    name: spring-oauth2-resource-server
   profiles:
     active: dev
   thymeleaf:
     cache: false
-  datasource:
-    url: jdbc:h2:mem:oauth2
-    driverClassName: org.h2.Driver
-    username: sa
-    password: password
-  h2:
-    console:
-      enabled: true
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-  redis:
-    database: 1
-    host: localhost
-    port: 6379
-    timeout: 5000
-  sesion:
-    store-type: REDIS
-    redis:
-      flush-mode: IMMEDIATE
-      namespace: oauth2:server:session
   security:
     filter:
       order: 3
+oauth:
+  server:
+    url: http://www.oauth2-server.com:8099
+  client:
+    id: resourceClientId
+    secret: secret
 management:
   endpoints:
     enabled-by-default: true
@@ -35,10 +21,7 @@ management:
       exposure:
         include: "*"
 server:
-  servlet:
-    session:
-      timeout: 180s
-  port: 8099
+  port: 8098
 logging:
   level:
     root: info
